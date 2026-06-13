@@ -12,11 +12,20 @@ computer and on-device AI.
 
 ## Landing page
 
-[`index.html`](index.html) is a single, fully self-contained HTML file — the launch film,
-device render, and Poppins fonts are all embedded as base64, so it works offline with no
-build step or external assets. (`AXIOM_kickstarter.html` is an identical descriptive copy.)
+[`index.html`](index.html) is the landing page. The device render and Poppins fonts are
+embedded as base64; the launch film — **The AXIOM Anthem** ad
+([`assets/axiom-anthem-ad.mp4`](assets/axiom-anthem-ad.mp4)) — is served as a streamable
+static asset for fast page loads. (`AXIOM_kickstarter.html` is a descriptive copy.)
 
-Open it directly in a browser, or it is served at the site root on Vercel.
+Open it directly in a browser (with `assets/` alongside it), or it is served at the site
+root on Vercel.
+
+### Companion app
+
+See [`docs/PRD_AXIOM_Command_App.md`](docs/PRD_AXIOM_Command_App.md) — the product
+requirements for **AXIOM Command**, the app that pairs with the device for live telemetry,
+casting maps and content to its screen, a synced capture vault, an AI copilot, and fleet
+management.
 
 ### Design
 
