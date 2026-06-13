@@ -1,8 +1,10 @@
 # AXIOM — The Pocket Computer With No Limits
 
-A self-contained Kickstarter landing page for **AXIOM**, the "Advanced Pocket Computer":
-a 6×3×1-inch device that fuses Flipper-Pro-class radios with a flagship-class Linux
-computer and on-device AI.
+A **Next.js** app containing the AXIOM Kickstarter landing page and **AXIOM Command**, the
+companion app — plus the original hardware design files.
+
+AXIOM is a 6×3×1-inch device that fuses Flipper-Pro-class radios with a flagship-class Linux
+computer and on-device AI:
 
 - **Flipper Pro radios** — Sub-GHz (433 / 868 / 915 MHz), multi-frequency RFID (13.56 MHz + 125 kHz), NFC
 - **Real compute** — 8-core Rockchip RK3588S, 16 GB LPDDR5, 256 GB NVMe, on-device AI (NPU)
@@ -10,27 +12,34 @@ computer and on-device AI.
 - **Connectivity** — Wi-Fi 6E, Bluetooth 5.3, USB-C PD
 - **Open & repairable** — 3D-printable enclosure, full BOM, schematics, replaceable battery
 
-## Landing page
+## Live
 
-[`index.html`](index.html) is the landing page. The device render and Poppins fonts are
-embedded as base64; the launch film — **The AXIOM Anthem** ad
-([`assets/axiom-anthem-ad.mp4`](assets/axiom-anthem-ad.mp4)) — is served as a streamable
-static asset for fast page loads. (`AXIOM_kickstarter.html` is a descriptive copy.)
+| Route | What |
+|---|---|
+| **`/`** ([get-axiom.vercel.app](https://get-axiom.vercel.app)) | Kickstarter landing page |
+| **`/app`** ([/app](https://get-axiom.vercel.app/app)) | AXIOM Command dashboard (Phase 1 / Alpha) |
 
-Open it directly in a browser (with `assets/` alongside it), or it is served at the site
-root on Vercel.
+## Stack
 
-### Companion app
+- **Next.js** (App Router) + React, deployed on Vercel.
+- `app/page.js` — landing page (renders `content/landing-body.html`; `app/LandingScript.js` wires interactivity). The launch film **The AXIOM Anthem** streams from `public/assets/axiom-anthem-ad.mp4`.
+- `app/app/page.js` — mounts **AXIOM Command** (`app/app/lib/*` device simulator, transport layer, and renderer) at `/app`.
+- Visual language: **DKube Design System 2.0** — Poppins, brand purple `#7660A8`, pill buttons, soft-shadow cards.
 
-See [`docs/PRD_AXIOM_Command_App.md`](docs/PRD_AXIOM_Command_App.md) — the product
-requirements for **AXIOM Command**, the app that pairs with the device for live telemetry,
-casting maps and content to its screen, a synced capture vault, an AI copilot, and fleet
-management.
+### Run locally
+```bash
+npm install
+npm run dev        # http://localhost:3000  (/ and /app)
+npm run build && npm start
+```
 
-### Design
+## AXIOM Command (the app)
 
-Visual language built on the **DKube Design System 2.0** — Poppins type, brand purple
-`#7660A8`, pill buttons, soft-shadow cards, out-quart motion.
+- **PRD:** [`docs/PRD_AXIOM_Command_App.md`](docs/PRD_AXIOM_Command_App.md) — telemetry, cast maps + cast-anything, RF signal mapping, AI copilot, automations, fleet/Teams, marketplace, business model.
+- **Plan:** [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) — 5 phases (Alpha → 2.0), 21 features.
+- **Tracking DB:** [`db/`](db/README.md) — NeonDB tables mirroring the plan; `node db/status.mjs` shows live progress.
+
+**Phase 1 (Alpha)** is in progress: pairing (AX-101), live telemetry dashboard (AX-102), cast-to-screen (AX-103), OTA (AX-110), and the transport layer (AX-111) all run today against an on-device **simulator** (`app/app/lib/device-sim.js`). The simulator swaps to real BLE/Wi-Fi/USB adapters in Beta with no app changes — the telemetry frame shape stays identical.
 
 ## Hardware source files
 
@@ -43,10 +52,11 @@ Visual language built on the **DKube Design System 2.0** — Poppins type, brand
 | `advanced_pocket_computer_GUIDE.md` | Build guide (fabrication → assembly) |
 | `advanced_pocket_computer_VISUAL.png` | Device render |
 
+A self-contained standalone copy of the landing page is kept at `public/kickstarter.html`.
+
 ---
 
-> **Note:** This is a concept campaign. Funding figures, backer counts, ship dates, and
-> pledge availability shown on the page are illustrative placeholders, not a live
-> fundraising offer. AXIOM's wireless features are intended for makers and security
-> researchers to use only on systems they own or are authorized to test, in compliance
-> with local laws and radio regulations.
+> **Note:** This is a concept campaign. Funding figures, backer counts, ship dates, and pledge
+> availability are illustrative placeholders, not a live fundraising offer. AXIOM's wireless
+> features are intended for makers and security researchers to use only on systems they own or
+> are authorized to test, in compliance with local laws and radio regulations.

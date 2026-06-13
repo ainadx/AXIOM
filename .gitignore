@@ -1,6 +1,11 @@
 # Claude Code local settings
 .claude/
 
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
 # Vercel
 .vercel/
 
@@ -14,4 +19,3 @@
 
 # Node
 node_modules/
-.env*
